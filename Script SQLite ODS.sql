@@ -7,8 +7,7 @@ CREATE TABLE circo_composition(
    COMMUNE_RESID TEXT,
    LIBcom TEXT,
    type_com TEXT,
-   date_collecte TEXT,
-   PRIMARY KEY(circo)
+   date_collecte TEXT
 );
 
 CREATE TABLE crimes_communes_2022(
@@ -20,8 +19,7 @@ CREATE TABLE crimes_communes_2022(
    tauxpourmille REAL,
    complementinfoval REAL,
    complementinfotaux REAL,
-   date_collecte TEXT,
-   PRIMARY KEY(code_insee)
+   date_collecte TEXT
 );
 
 CREATE TABLE famile_TAUX_CHOMAGE_valeurs_trimestrielles(
@@ -38,10 +36,9 @@ CREATE TABLE famile_TAUX_CHOMAGE_valeurs_trimestrielles(
 CREATE TABLE indic_stat_circonscriptions_legislatives_2022(
    circo TEXT,
    Nom_de_la_circonscription VARCHAR(200),
-   Inscrit_22 INTEGEREGER,
-   pop_legal_22 INTEGEREGER,
-   pop_legal_19 INTEGEREGER,
-   pop_legal_13 INTEGEREGER,
+   Inscrit_22 INTEGER,
+   pop_legal_19 INTEGER,
+   pop_legal_13 INTEGER,
    tvar_pop REAL,
    pop_pole_aav REAL,
    pop_cour_aav REAL,
@@ -49,12 +46,12 @@ CREATE TABLE indic_stat_circonscriptions_legislatives_2022(
    pop_urb REAL,
    pop_rur_periu REAL,
    pop_rur_non_periu REAL,
-   age_moyen INTEGEREGER,
-   dec90 INTEGEREGER,
-   dec75 INTEGEREGER,
-   dec50 INTEGEREGER,
-   dec25 INTEGEREGER,
-   dec10 INTEGEREGER,
+   age_moyen REAL,
+   dec90 INTEGER,
+   dec75 INTEGER,
+   dec50 INTEGER,
+   dec25 INTEGER,
+   dec10 INTEGER,
    actemp REAL,
    actcho REAL,
    inactret REAL,
@@ -83,7 +80,7 @@ CREATE TABLE indic_stat_circonscriptions_legislatives_2022(
    act_agr REAL,
    act_art REAL,
    act_cad REAL,
-   act_INTEGER REAL,
+   act_int REAL,
    act_emp REAL,
    act_ouv REAL,
    act_cho REAL,
@@ -140,8 +137,8 @@ CREATE TABLE indic_stat_circonscriptions_legislatives_2022(
    part_medians_diff REAL,
    part_plutot_aises_diff REAL,
    part_aises_diff REAL,
-   D1_diff INTEGEREGER,
-   D9_diff INTEGEREGER,
+   D1_diff INTEGER,
+   D9_diff INTEGER,
    rpt_D9_D1_diff REAL,
    tx_pauvrete60_diff_trageRF1 REAL,
    tx_pauvrete60_diff_trageRF2 REAL,
@@ -175,12 +172,12 @@ CREATE TABLE presidentielle_2022_communes_t1(
    voix INTEGEREGER NOT NULL,
    date_election TEXT,
    date_collecte TEXT,
-   PRIMARY KEY(code_departement, code_commune)
+   PRIMARY KEY(code_departement, code_commune, prenom, nom)
 );
 
 
 CREATE TABLE resultats_par_niveau_subcom_t2_france_entiere_commun(
-   Code_du_département TEXT,
+   Code_du_departement TEXT,
    Code_de_la_commune TEXT,
    Libelle_du_departement TEXT,
    Libelle_de_la_commune TEXT,
@@ -189,17 +186,17 @@ CREATE TABLE resultats_par_niveau_subcom_t2_france_entiere_commun(
    Abstentions INTEGER,
    _Abs_Ins REAL,
    Votants INTEGER,
-   _Vot_ins REAL,
+   _Vot_Ins REAL,
    Blancs INTEGER,
    _Blancs_Ins REAL,
    _Blancs_Vot REAL,
    Nuls INTEGER,
-   _Nuls_ins REAL,
+   _Nuls_Ins REAL,
    _Nuls_Vot REAL,
-   Exprimés INTEGER,
+   Exprimes INTEGER,
    _Exp_Ins REAL,
    _Exp_Vot REAL,
-   PRIMARY KEY(Code_du_département, Code_de_la_commune)
+   date_collecte TEXT
 );
 
 CREATE TABLE resultats_par_niveau_subcom_t2_france_entiere_candidat(
@@ -210,8 +207,7 @@ CREATE TABLE resultats_par_niveau_subcom_t2_france_entiere_candidat(
    Voix INTEGER,
    _Voix_Ins REAL,
    _Voix_Exp REAL,
-   Code_du_département TEXT NOT NULL,
+   Code_du_departement TEXT NOT NULL,
    Code_de_la_commune TEXT NOT NULL,
-   PRIMARY KEY(N_Panneau),
-   FOREIGN KEY(Code_du_département, Code_de_la_commune) REFERENCES resultats_par_niveau_subcom_t2_france_entiere_commun(Code_du_département, Code_de_la_commune)
+   FOREIGN KEY(Code_du_departement, Code_de_la_commune) REFERENCES resultats_par_niveau_subcom_t2_france_entiere_commun(Code_du_département, Code_de_la_commune)
 );
