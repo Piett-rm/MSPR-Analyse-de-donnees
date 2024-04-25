@@ -1,2 +1,7 @@
 venv/
 *.db
+data/
+.idea/
+.pyc
+__pycache__/
+*.sqlite
