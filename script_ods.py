@@ -15,7 +15,6 @@ df_circo_composition = pd.read_excel(path_circo_composition, header=0, sheet_nam
 
 
 def insert_to_db():
-
     conn = sqlite3.connect('ODS.sqlite')
     df_chomage.drop('Période', axis=1, inplace=True)
     df_chomage_finales = df_chomage.melt(id_vars=['Libellé', 'idBank', 'Dernière mise à jour'], value_name='Taux')
