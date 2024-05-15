@@ -8,3 +8,5 @@ if __name__ == "__main__":
     # insert_to_db()
     jointure_table_pour_DW()
     # data_aleatoire()
+    # jointure_table_pour_DW()
+    data_aleatoire()

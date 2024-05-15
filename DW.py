@@ -9,7 +9,9 @@ def jointure_table_pour_DW():
     df_election = pd.read_sql_query("SELECT * FROM {}".format("election"), conn)
     df_securite = pd.read_sql_query("SELECT * FROM {}".format("securite"), conn)
     df_pauvrete = pd.read_sql_query("SELECT * FROM {}".format("pauvrete"), conn)
+
     conn.close()
+
     df_securite = df_securite[df_securite['date'].str.contains('2021')]
     df_securite = df_securite.drop(columns=['unite_de_compte','valeur_publiee'])
 
@@ -38,18 +40,7 @@ def jointure_table_pour_DW():
     df_election['CODGEOGRA'] = df_election['code_departement'].str.cat(df_election['code_commune'], sep='')
 
     votes_par_ville = df_election.groupby('libelle_commune')['voix'].sum().reset_index()
-    votes_par_ville['voix'] = votes_par_ville['voix'].astype(int)
-
-    bins = [0, 999, 4999, 9999, float('inf')]
-    labels = ['Petite ville', 'Petite moyenne ville', 'Grande ville', 'Métropole']
-
-    votes_par_ville['catégorie'] = pd.cut(votes_par_ville['voix'], bins=bins, labels=labels, right=False)
-
     votes_par_ville.rename(columns={'voix': 'total_voix_par_ville'}, inplace=True)
-
-    valeurs_indesirables = (df_election['libelle_commune'] == 'Besmé') | (df_election['libelle_commune'] == 'Wail')| (df_election['libelle_commune'] == 'Ponchon') | (df_election['libelle_commune'] == "Hodenc-l'Evêque")| (df_election['libelle_commune'] == "Maysel")| (df_election['libelle_commune'] == "Blérancourt")
-    df_election = df_election[~valeurs_indesirables]
-
     df_election = pd.merge(votes_par_ville,df_election, on='libelle_commune')
     df_election['pourcentage_voix'] = (df_election['voix'] / df_election['total_voix_par_ville']) * 100
     df_election.drop(columns=['total_voix_par_ville','voix'])
@@ -72,5 +63,4 @@ def jointure_table_pour_DW():
     conn = sqlite3.connect("DW_all_data.sqlite")
 
     jointure.to_sql('DW', conn, if_exists='append', index=True, index_label='id')
-
     conn.close()
