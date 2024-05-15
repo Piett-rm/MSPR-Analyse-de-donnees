@@ -9,21 +9,24 @@ def data_aleatoire():
     cur = conn.cursor()
     index_ville =set()
     dfs = []
+    df = pd.read_sql_query("SELECT * FROM {}".format("DW"), conn)
+    df.to_csv("all_donnees.csv", index=False)
+
     cur.execute("SELECT DISTINCT libelle_commune from DW")
     villes = cur.fetchall()
 
-    # print(resultat)
-    while len(index_ville) < 2:
+    while len(index_ville) < 350:
         random_row_number = random.randint(0, len(villes) - 1)
         index_ville.add(random_row_number)
 
-    # #
     for index in index_ville:
-        print(index)
-        df_dw = pd.read_sql_query(f"SELECT * FROM DW WHERE libelle_commune='{str(villes[index][0])}'", conn)
+        ville = villes[index][0]
+        query = "SELECT * FROM DW WHERE libelle_commune=?"
+        df_dw = pd.read_sql_query(query, conn, params=(ville,))
         dfs.append(df_dw)
 
+    # df.sample(n=300)
 
     df = pd.concat(dfs, ignore_index=True)
-    chemin_fichier_excel = "donnees.csv"
+    chemin_fichier_excel = "donnees_aleatoires.csv"
     df.to_csv(chemin_fichier_excel, index=False)
