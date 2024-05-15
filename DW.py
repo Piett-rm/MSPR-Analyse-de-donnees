@@ -70,18 +70,6 @@ def jointure_table_pour_DW():
     df_vote = final_merge[['voix', 'codeINSEE', 'idCandidat']]
     df_vote['idElection'] = 0
 
-
-    """
-    jointure_composition_pauvrete = pd.merge(df_composition,df_pauvrete_new,on="circo",how='inner').drop(columns=["type_com","LIBcom","DEP","REG","libreg"])
-    jointure = pd.merge(jointure_composition_pauvrete,df_election,left_on="COMMUNE_RESID", right_on="CODGEOGRA",how='inner').drop(columns=["CODGEOGRA","code_departement","libelle_departement"])
-    jointure = pd.merge(jointure,df_securite,left_on="COMMUNE_RESID", right_on="code_insee",how='inner').drop(columns=["COMMUNE_RESID","complementinfoval","complementinfotaux","valeur_publiee"])
-    jointure = pd.merge(jointure,df_chomage_taux_moyenne_annee,left_on="libdep",right_on="Libelle",how='inner').drop(columns=["code_insee", "code_commune"])
-
-    conn = sqlite3.connect("DW_all_data.sqlite")
-
-    jointure.to_sql('DW', conn, if_exists='append', index=True, index_label='id')
-    """
-
     conn = sqlite3.connect("DW.sqlite")
 
     df_commune.to_sql('Commune', conn, if_exists='append', index=True, index_label='id')
