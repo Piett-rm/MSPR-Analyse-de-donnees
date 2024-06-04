@@ -5,6 +5,6 @@ import os
 
 if __name__ == "__main__":
 
-    # insert_to_db()
+    insert_to_db()
     jointure_table_pour_DW()
-    # data_aleatoire()
+    data_aleatoire()
