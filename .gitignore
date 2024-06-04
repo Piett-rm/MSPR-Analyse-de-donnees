@@ -290,3 +290,4 @@ pip-selfcheck.json
 data/
 .idea/
 *.sqlite
+*.csv
