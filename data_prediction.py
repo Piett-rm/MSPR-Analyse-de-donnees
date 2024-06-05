@@ -67,7 +67,7 @@ def data_prediction():
     jointure_composition_pauvrete = pd.merge(df_composition,df_pauvrete_new,on="circo",how='inner').drop(columns=["type_com","LIBcom","DEP","REG","libreg"])
     jointure_election = pd.merge(jointure_composition_pauvrete,df_election,left_on="COMMUNE_RESID", right_on="CODGEOGRA",how='inner').drop(columns=["CODGEOGRA","code_departement","libelle_departement"])
     jointure_securite = pd.merge(jointure_election,df_securite,left_on="COMMUNE_RESID", right_on="code_insee",how='inner').drop(columns=["COMMUNE_RESID"])
-    jointure_chomage = pd.merge(jointure_securite,df_chomage_taux_moyenne_annee,left_on="libdep",right_on="Libelle",how='inner').drop(columns=["code_commune","Libelle","date"])
+    jointure_chomage = pd.merge(jointure_securite,df_chomage_taux_moyenne_annee,left_on="libdep",right_on="Libelle",how='inner').drop(columns=["code_commune","Libelle","date"]).drop_duplicates()
 
     chemin_fichier_excel = "donnees_predictions.csv"
     jointure_chomage.to_csv(chemin_fichier_excel, index=False)
