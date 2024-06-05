@@ -62,7 +62,7 @@ def data_prediction():
 
     df_election = pd.merge(votes_par_ville,df_election, on='libelle_commune')
     df_election['pourcentage_voix'] = (df_election['voix'] / df_election['total_voix_par_ville']) * 100
-    df_election = df_election.drop(columns=['total_voix_par_ville','voix', 'pourcentage_voix'])
+    df_election = df_election.drop(columns=['voix', 'pourcentage_voix'])
 
     jointure_composition_pauvrete = pd.merge(df_composition,df_pauvrete_new,on="circo",how='inner').drop(columns=["type_com","LIBcom","DEP","REG","libreg"])
     jointure_election = pd.merge(jointure_composition_pauvrete,df_election,left_on="COMMUNE_RESID", right_on="CODGEOGRA",how='inner').drop(columns=["CODGEOGRA","code_departement","libelle_departement"])
