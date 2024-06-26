@@ -2,6 +2,9 @@ import pandas as pd
 import sqlite3
 
 def securite_annee(annee: str):
+    """
+        Parcourt et remet en forme le fichier sur les données crimes
+    """
     path = './data/donnee-data.gouv-2023-geographie2023-produit-le2024-03-07.csv'
     df = pd.read_csv(path, delimiter=";", low_memory=False)
 
@@ -15,7 +18,9 @@ def securite_annee(annee: str):
     df = df.rename(columns={"CODGEO_2023": "code_insee", "unité_de_compte": "unite_de_compte", "valeur_publiée": "valeur_publiee"})
 
     return df
-
+"""
+    Chargement en RAM des données
+"""
 path_election = './data/presidentielle-2022-communes-t1.csv'
 path_crime = './data/crimes_communes_2022.csv'
 path_pauvrete = './data/indic-stat-circonscriptions-legislatives-2022.xlsx'
@@ -34,6 +39,9 @@ df_circo_composition = pd.read_excel(path_circo_composition, header=0, sheet_nam
 
 
 def insert_to_db():
+    """
+        Insersion des données brut dans l'ODS
+    """
     conn = sqlite3.connect('ODS.sqlite')
     df_chomage.drop('Période', axis=1, inplace=True)
     df_chomage_finales = df_chomage.melt(id_vars=['Libellé', 'idBank', 'Dernière mise à jour'], value_name='Taux')

@@ -3,6 +3,9 @@ import sqlite3
 import random
 
 def data_prediction():
+    """
+        Selection des données 2023 des haut de france en un csv
+    """
     conn = sqlite3.connect('ODS.sqlite')
     df_chomage = pd.read_sql_query("SELECT * FROM {}".format("chomage"), conn)
     df_composition = pd.read_sql_query("SELECT * FROM {}".format("composition"), conn)
