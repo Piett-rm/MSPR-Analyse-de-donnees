@@ -5,6 +5,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.metrics import MeanSquaredError
 from tensorflow.keras import backend as K
 
+# Méthodes nécessaires au fonctionnement du modèle Keras
 lengh_trainning_set = 5385
 
 @register_keras_serializable()
