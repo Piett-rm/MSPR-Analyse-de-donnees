@@ -5,6 +5,9 @@ import pandas as pd
 
 
 def data_aleatoire():
+    """
+        Selection des données 2022 des haut de france en deux csv prêt à entrainement
+    """
     conn = sqlite3.connect('DW_all_data.sqlite')
     cur = conn.cursor()
     index_ville =set()

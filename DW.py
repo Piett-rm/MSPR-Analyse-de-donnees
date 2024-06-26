@@ -3,6 +3,9 @@ import sqlite3
 
 
 def jointure_table_pour_DW():
+    """
+        Mise en qualité et insersion des données propre dans le DW
+    """
     conn = sqlite3.connect('ODS.sqlite')
     df_chomage = pd.read_sql_query("SELECT * FROM {}".format("chomage"), conn)
     df_composition = pd.read_sql_query("SELECT * FROM {}".format("composition"), conn)
